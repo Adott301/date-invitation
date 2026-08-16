@@ -30,6 +30,34 @@ export default function DateInvitation() {
     }
   };
 
+  // Hàm xử lý khi bấm Confirm: Gửi thông tin về Telegram rồi chuyển sang trang 3
+  const handleConfirm = async () => {
+    const BOT_TOKEN = "8841788578:AAEi03Mftnhdh64-I1qxcTdbLzHoIui5g7A";
+    const CHAT_ID = "6209135174";
+
+    const formattedTime = date && time ? `${time} ngày ${date}` : "Chưa chọn cụ thể";
+    const selectedFoodsText = foods.length > 0 ? foods.join(", ") : "Không chọn món cụ thể";
+
+    const message = `🎉 Crush đã chốt lịch hẹn rồi nè!\n📅 Thời gian: ${formattedTime}\n🎯 Hoạt động: ${plan}\n🍽️ Món ăn: ${selectedFoodsText}`;
+
+    try {
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+        }),
+      });
+    } catch (err) {
+      console.error("Lỗi gửi thông báo Telegram:", err);
+    }
+
+    setSubmitted(3);
+  };
+
   return (
     <main className="min-h-screen bg-pink-50 flex items-center justify-center p-4 font-sans text-gray-800">
       <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center relative overflow-hidden border border-pink-100">
@@ -37,7 +65,6 @@ export default function DateInvitation() {
         {/* TRANG 1: Lời mời & Nút Yes/No */}
         {submitted === 1 && (
           <div>
-
             <h1 className="text-2xl font-bold text-pink-600 mb-6">
               Mai đi chơi với tui một bữa nha?
             </h1>
@@ -128,7 +155,7 @@ export default function DateInvitation() {
 
             {/* Nút Xác Nhận */}
             <button
-              onClick={() => setSubmitted(3)}
+              onClick={handleConfirm}
               className="w-full mt-2 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-full shadow-md transition text-sm"
             >
               Confirm 🎉
@@ -144,10 +171,10 @@ export default function DateInvitation() {
             <p className="text-gray-600 mb-4 text-sm">Đây là thông tin đã chọn:</p>
 
             <div className="bg-pink-50 p-4 rounded-xl text-left space-y-2 mb-6 text-sm border border-pink-100">
-              <p>📅 **Thời gian:** {date && time ? `${time} ngày ${date}` : "Chưa chọn cụ thể"}</p>
-              <p>🎯 **Hoạt động:** {plan}</p>
+              <p>📅 <b>Thời gian:</b> {date && time ? `${time} ngày ${date}` : "Chưa chọn cụ thể"}</p>
+              <p>🎯 <b>Hoạt động:</b> {plan}</p>
               {plan === "Đi ăn uống cà phê" && (
-                <p>🍽️ **Món ăn:** {foods.length > 0 ? foods.join(", ") : "Tùy bạn chọn sau nha!"}</p>
+                <p>🍽️ <b>Món ăn:</b> {foods.length > 0 ? foods.join(", ") : "See you soon!"}</p>
               )}
             </div>
 
