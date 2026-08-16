@@ -65,7 +65,7 @@ export default function DateInvitation() {
           <div className="text-left space-y-4">
             <div className="text-center">
               <div className="text-4xl mb-2">✨</div>
-              <h2 className="text-xl font-bold text-pink-600">Lên lịch hẹn hò nào!</h2>
+              <h2 className="text-xl font-bold text-pink-600">Lên lịch ngày mai nào!</h2>
             </div>
 
             {/* Chọn Ngày & Giờ */}
