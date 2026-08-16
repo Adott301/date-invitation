@@ -141,7 +141,7 @@ export default function DateInvitation() {
           <div className="text-center">
             <div className="text-5xl mb-4">🥳</div>
             <h2 className="text-2xl font-bold text-pink-600 mb-2">Booking Successful!</h2>
-            <p className="text-gray-600 mb-4 text-sm">Hẹn gặp bạn nha! Đây là thông tin đã chọn:</p>
+            <p className="text-gray-600 mb-4 text-sm">Đây là thông tin đã chọn:</p>
 
             <div className="bg-pink-50 p-4 rounded-xl text-left space-y-2 mb-6 text-sm border border-pink-100">
               <p>📅 **Thời gian:** {date && time ? `${time} ngày ${date}` : "Chưa chọn cụ thể"}</p>
